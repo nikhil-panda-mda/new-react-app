@@ -5,8 +5,8 @@ function Counter() {
   const [text, setText] = useState("");
 
   return (
-    <div class="w-full text-center">
-      <p class="mb-2">You typed: {text}</p>
+    <div className="w-full text-center">
+      <p className="mb-2">You typed: {text}</p>
       <input 
         type="text" 
         placeholder="type here..X>" 
