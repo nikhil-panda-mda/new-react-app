@@ -12,13 +12,20 @@ export default function ({ initialComments , postId }) {
     }
     setComments(prev => [...prev, newComment]);
   }
+  
+  const toggleLike = (index) => {
+    setComments(prev => 
+      prev.map((comment, i) => 
+        i === index ? {...comment, liked: !comment.liked} : comment
+      )
+    )
+  };
 
   return (
     <div className="border rounded-lg mt-4 space-y-2 h-50 overflow-y-scroll">
       <CommentBox post={postId} addComment = {addComment} />
       {comments.map((comment, index) => {
         const username = Object.keys(comment)[0];
-        const likedornot = Object.values(comment)[1];
         const text = comment[username];
         const liked = comment.liked;
         return (
@@ -28,7 +35,7 @@ export default function ({ initialComments , postId }) {
               <p className='font-semibold'>{text}</p>
             </div>
             <div className="ms-auto my-auto">
-              <LikeButton like={liked}/>
+              <LikeButton liked={liked} onClick={() => toggleLike(index)}/>
             </div>
           </div>
         );

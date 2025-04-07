@@ -1,13 +1,9 @@
-// src/components/LikeButton.jsx
-import { useState } from "react";
-
-export default function({ like }) {
-  const [liked, setLiked] = useState(like);
-
+export default function({ liked, onClick }) {
+  
   return (
     <div>
       <button
-        onClick={() => setLiked(!liked)}
+        onClick={onClick}
         style={{
           background: "transparent",
           border: "none",

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Comments from './Comments';
 export default function ({ posts }) {
+  console.log("called !!")
   const [openPostIds, setOpenPostIds] = useState([]);
 
   const toggleComments = (postId) => {
