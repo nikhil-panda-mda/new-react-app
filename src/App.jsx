@@ -1,6 +1,7 @@
 import Header from './components/Header'
 import Content from './components/Content';
 import Footer from './components/Footer';
+import Effects from './components/Effects';
 import posts from './utils/posts';
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
       <div className='pt-20 px-3 pb-3 flex-1'>
         {/* <Counter /> */}
         <div className="mb-10">
-          <Content posts={posts}/>
+          {/* <Content posts={posts}/> */}
+          <Effects/>
         </div>
       </div>
       <Footer />
