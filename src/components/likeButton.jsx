@@ -1,8 +1,8 @@
 // src/components/LikeButton.jsx
 import { useState } from "react";
 
-export default function() {
-  const [liked, setLiked] = useState(false);
+export default function({ like }) {
+  const [liked, setLiked] = useState(like);
 
   return (
     <div>

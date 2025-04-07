@@ -1,31 +1,37 @@
 const posts = [
   {
+    id: "9871",
     title: "Work Space",
-    image: "workspace.jpg", // path or import
+    image: "setup.png", // path or import
     likes: 42,
-    comments: {
-      user1: "A serious comment",
-      user2: "A funny comment",
-    },
+    body: "This is my first post",
+    comments: [
+      {user1: "A serious comment", liked: false,},
+      {user2: "A funny comment", liked: false},
+    ],
   },
   {
+    id: "9872",
     title: "Chill Vibes",
-    image: "beach.jpg",
+    image: "beach.png",
     likes: 128,
-    comments: {
-      coolguy: "wish I was there 😎",
-      devgirl: "okay but where’s the wifi tho",
-    },
+    body: "Hooks make it magical",
+    comments: [
+      {coolguy: "wish I was there 😎", liked: true},
+      {devgirl: "okay but where’s the wifi tho", liked: false},
+    ],
   },
   {
+    id: "9873",
     title: "Code All Night",
-    image: "darkmode.jpg",
+    image: "image-3.png",
     likes: 99,
-    comments: {
-      sleepyJoe: "relatable content",
-      caffeineQueen: "3AM commits hit different",
-      yourManager: "Please take a break.",
-    },
+    body: "Utility-first vibes" ,
+    comments: [
+      {sleepyJoe: "relatable content", liked: true},
+      {caffeineQueen: "3AM commits hit different", liked: true},
+      {yourManager: "Please take a break.", liked: false},
+    ],
   },
 ];
 

@@ -1,25 +1,32 @@
-import image from '../assets/images/image.png';
-export default function (post) {
+import { useState } from 'react';
+import Comments from './Comments';
+export default function ({ posts }) {
+  const [openPostIds, setOpenPostIds] = useState([]);
+
+  const toggleComments = (postId) => {
+    setOpenPostIds(prev => {
+      return prev.includes(postId) ? prev.filter(id => id !== postId) : [...prev, postId]
+    })
+  };
+
   return (
-    <>
-      <div className="p-2">
-        <div className="w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <div className='w-full'>
-            <img src={image}
-              alt="A highly productive cat developer"
-              className ="w-auto h-70 shadow-md mx-auto" />
+    <div className="grid grid-cols-3 gap-4 items-start">
+      {posts.map((post) => (
+        <div key={post.id} className="pb-4 px-4 border rounded-xl shadow-md hover:shadow-lg flex-1">
+          <div className="w-full pb-4">
+            <img src={`/images/${post.image}`} alt="" className='w-90 mx-auto' />
           </div>
-          <div className="p-5">
-            <a href="#">
-              <h5 className="mb-2 text-2xl font-bold text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-            </a>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-            <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Read more
-            </a>
+          <div className='pb-3'>
+            <h2 className="text-xl font-bold">{post.title}</h2>
+            <p className="text-gray-400 mt-2">{post.body}</p>
           </div>
+          <button onClick={() => toggleComments(post.id)}>
+            {openPostIds.includes(post.id) ? "Hide Comments" : "Show Comments"}
+          </button>
+
+          {openPostIds.includes(post.id) && <Comments initialComments={post.comments} postId={post.id} />}
         </div>
-      </div>
-    </>
+      ))}
+    </div>
   );
 }
