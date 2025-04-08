@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 export default function Timer() {
   const [count, setCount] = useState(0);
+  const [pauseCount, setPauseCount] = useState({play: 0, pause: 0})
   const [intervalId, setIntervalId] = useState(null);
 
   // Format seconds to MM:SS
@@ -20,10 +21,15 @@ export default function Timer() {
     setIntervalId(id);
   };
 
+  useEffect(() => {
+    console.log(pauseCount, " - times paused");
+  }, [pauseCount])
+  
   const pauseTimer = () => {
     if (intervalId) {
       clearInterval(intervalId);
       setIntervalId(null);
+      setPauseCount(prev => ({...prev, pause: prev.pause + 1}));
     }
   };
 
