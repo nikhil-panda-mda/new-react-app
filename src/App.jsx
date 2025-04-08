@@ -5,16 +5,31 @@ import Moods from './components/Moods';
 import Effects from './components/Effects';
 import posts from './utils/posts';
 import Tasks from './components/Tasks';
-import tasks from "./utils/tasks";
+import NewTask from './components/NewTask';
+import { useState } from 'react';
+import taskList from "./utils/tasks";
 
 function App() {
 
-  const [tasks, setTasks] = useState(tasks);
-  const onClick = (id) => {
+  const [tasks, setTasks] = useState(taskList);
 
+  const onClick = (id) => {
+    setTasks(prev => {
+      return prev.map(task =>
+        task.id == id ? { ...task, isFinished: !task.isFinished } : task
+      )
+    })
   };
 
-  console.log("called !");
+  const onAddTask = (taskTitle) => {
+    const newTask = {
+      id: crypto.randomUUID(),
+      title: taskTitle,
+      isFinished: 0
+    }
+    setTasks(prev => [...prev, newTask]);
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -24,10 +39,14 @@ function App() {
           {/* <Content posts={posts}/> */}
           {/* <Effects/> */}
           {/* <Moods/> */}
+          <div className='p-3'>
+            <NewTask addTask={(title) => onAddTask(title)}/>
+          </div>
           <div className='grid grid-cols-3 gap-3'>
-          {tasks.map((task) => (
-              <Tasks key={task.id} task={task} finished={task.isFinished} click={() => onClick(task.id)}/>
-            ))}
+            {
+              tasks.map(task =>
+                <Tasks key={task.id} task={task} finished={task.isFinished} click={() => onClick(task.id)} />
+              )}
           </div>
         </div>
       </div>
